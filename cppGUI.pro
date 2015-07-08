@@ -23,24 +23,27 @@ DESTDIR = ../../bin/
 INCLUDEPATH += $$PWD/../cppCORE
 LIBS += -L$$PWD/../../bin -lcppCORE
 
-SOURCES += BusyIndicator.cpp \
+SOURCES += \
     Application.cpp \
     GUIHelper.cpp \
     FileChooser.cpp \
     ClickableLabel.cpp \
     ColorSelector.cpp \
-    ScrollableTextDialog.cpp
+    ScrollableTextDialog.cpp \
+    BusyDialog.cpp
 
-HEADERS += BusyIndicator.h \
+HEADERS += \
     Application.h \
     GUIHelper.h \
     FileChooser.h \
     ClickableLabel.h \
     ColorSelector.h \
-    ScrollableTextDialog.h
+    ScrollableTextDialog.h \
+    BusyDialog.h
     
 RESOURCES += \
     resources.qrc
 
 FORMS += \
-    ScrollableTextDialog.ui
+    ScrollableTextDialog.ui \
+    BusyDialog.ui
