@@ -11,17 +11,18 @@ void GUIHelper::showMessage(QString title, QString message, QMap<QString, QStrin
 	//create dialog
 	QDialog* dialog = new QDialog(QApplication::activeWindow());
 	dialog->window()->setWindowTitle(title);
-	QFormLayout* layout = new QFormLayout();
-	layout->setFormAlignment(Qt::AlignTop | Qt::AlignLeft);
+	QGridLayout* layout = new QGridLayout();
 	dialog->window()->setLayout(layout);
 
 	//add content
-	QLabel* label = new QLabel(message);
-	layout->addRow("message:", label);
+	int row = 0;
+	layout->addWidget(new QLabel("message:"),row ,0, Qt::AlignLeft|Qt::AlignTop);
+	layout->addWidget(new QLabel(message),row ,1);
 	foreach(QString key, add_info.keys())
 	{
-		label = new QLabel(add_info[key]);
-		layout->addRow(key + ":", label);
+		++row;
+		layout->addWidget(new QLabel(key + ":"),row ,0, Qt::AlignLeft|Qt::AlignTop);
+		layout->addWidget(new QLabel(add_info[key]),row ,1);
 	}
 
 	//show
