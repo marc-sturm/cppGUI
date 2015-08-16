@@ -38,8 +38,7 @@ HEADERS += \
     ScrollableTextDialog.h \
     BusyDialog.h
     
-RESOURCES += \
-    resources.qrc
+RESOURCES +=
 
 FORMS += \
     ScrollableTextDialog.ui \
