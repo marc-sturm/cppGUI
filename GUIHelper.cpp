@@ -76,5 +76,6 @@ QFrame* GUIHelper::horizontalLine()
 	line->setFrameShape(QFrame::HLine);
 	line->setFrameShadow(QFrame::Sunken);
 	line->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+	line->setMinimumHeight(3);
 	return line;
 }
