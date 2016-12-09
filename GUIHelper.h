@@ -14,8 +14,10 @@ public:
 	///Shows a message dialog with title, message and additional information.
 	static void showMessage(QString title, QString message, QMap<QString, QString> add_info=QMap<QString, QString>());
 
-	///Shows a widget as a dialog. If @p buttons is @em true, 'ok' and 'cancel' buttons are shown.
-	static bool showWidgetAsDialog(QWidget* widget, QString title, bool buttons);
+	///Takes ownership of a widget and shows is as a dialog.
+	///Make sure a copy of the returned shared pointer exists as long as you use the dialog or the widget.
+	///If @p buttons is @em true, 'ok' and 'cancel' buttons are shown.
+	static QSharedPointer<QDialog> showWidgetAsDialog(QWidget* widget, QString title, bool buttons, bool modal=true);
 
 	///Custom splitter styler
 	static void styleSplitter(QSplitter* splitter);

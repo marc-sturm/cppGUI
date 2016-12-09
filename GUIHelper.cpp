@@ -4,7 +4,7 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QDialogButtonBox>
-
+#include <QDebug>
 
 void GUIHelper::showMessage(QString title, QString message, QMap<QString, QString> add_info)
 {
@@ -29,9 +29,9 @@ void GUIHelper::showMessage(QString title, QString message, QMap<QString, QStrin
 	dialog->exec();
 }
 
-bool GUIHelper::showWidgetAsDialog(QWidget* widget, QString title, bool buttons)
+QSharedPointer<QDialog> GUIHelper::showWidgetAsDialog(QWidget* widget, QString title, bool buttons, bool modal)
 {
-	QDialog* dialog = new QDialog(QApplication::activeWindow());
+	QSharedPointer<QDialog> dialog = QSharedPointer<QDialog>(new QDialog(QApplication::activeWindow()));
 	dialog->setWindowFlags(Qt::Window);
 	dialog->setWindowTitle(title);
 
@@ -39,28 +39,26 @@ bool GUIHelper::showWidgetAsDialog(QWidget* widget, QString title, bool buttons)
 	dialog->layout()->setMargin(3);
 	dialog->layout()->addWidget(widget);
 
-
 	//add buttons
 	if (buttons)
 	{
 		QDialogButtonBox* button_box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-		dialog->connect(button_box, SIGNAL(accepted()), dialog, SLOT(accept()));
-		dialog->connect(button_box, SIGNAL(rejected()), dialog, SLOT(reject()));
+		dialog->connect(button_box, SIGNAL(accepted()), dialog.data(), SLOT(accept()));
+		dialog->connect(button_box, SIGNAL(rejected()), dialog.data(), SLOT(reject()));
 		dialog->layout()->addWidget(button_box);
 	}
 
 	//show dialog
-	dialog->exec();
+	if (modal)
+	{
+		dialog->exec();
+	}
+	else
+	{
+		dialog->show();
+	}
 
-	//cache result
-	bool accepted = dialog->result();
-
-	//delete dialog
-	dialog->layout()->removeWidget(widget);
-	widget->setParent(0);
-	delete dialog;
-
-	return accepted;
+	return dialog;
 }
 
 void GUIHelper::styleSplitter(QSplitter* splitter)
