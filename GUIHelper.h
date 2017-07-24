@@ -6,6 +6,7 @@
 #include <QMap>
 #include <QWidget>
 #include <QSplitter>
+#include <QTableWidget>
 
 ///Auxilary helper functions for the GUI.
 class CPPGUISHARED_EXPORT GUIHelper
@@ -21,6 +22,9 @@ public:
 
 	///Custom splitter styler
 	static void styleSplitter(QSplitter* splitter);
+
+	///Resize column width and hight
+	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1);
 
 	///Creates a horizontal line
 	static QFrame* horizontalLine();

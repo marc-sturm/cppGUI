@@ -67,6 +67,31 @@ void GUIHelper::styleSplitter(QSplitter* splitter)
 	splitter->setStyleSheet("QSplitter::handle { background-color: #666666; margin: 1px; }");
 }
 
+void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width)
+{
+	//resize columns width
+	widget->resizeColumnsToContents();
+
+	//restrict width
+	if (max_col_width>0)
+	{
+		for (int i=0; i<widget->columnCount(); ++i)
+		{
+			if (widget->columnWidth(i)>max_col_width)
+			{
+				widget->setColumnWidth(i, max_col_width);
+			}
+		}
+	}
+
+	//row height
+	widget->resizeRowToContents(0);
+	for (int i=1; i<widget->rowCount(); ++i)
+	{
+		widget->setRowHeight(i, widget->rowHeight(0));
+	}
+}
+
 QFrame* GUIHelper::horizontalLine()
 {
 	QFrame* line = new QFrame();
