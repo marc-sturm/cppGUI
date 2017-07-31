@@ -84,11 +84,25 @@ void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width)
 		}
 	}
 
-	//row height
-	widget->resizeRowToContents(0);
-	for (int i=1; i<widget->rowCount(); ++i)
+	//determine row height
+	int height = -1;
+	for (int i=0; i<widget->rowCount(); ++i)
 	{
-		widget->setRowHeight(i, widget->rowHeight(0));
+		if (!widget->isRowHidden(i))
+		{
+			widget->resizeRowToContents(i);
+			height = widget->rowHeight(i);
+			break;
+		}
+	}
+
+	//set row height
+	if (height!=-1)
+	{
+		for (int i=0; i<widget->rowCount(); ++i)
+		{
+			widget->setRowHeight(i, height);
+		}
 	}
 }
 
