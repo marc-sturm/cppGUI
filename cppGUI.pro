@@ -25,6 +25,7 @@ SOURCES += \
     GUIHelper.cpp \
     FileChooser.cpp \
     ClickableLabel.cpp \
+    ClickableLineEdit.cpp \
     ColorSelector.cpp \
     ScrollableTextDialog.cpp \
     BusyDialog.cpp
@@ -34,6 +35,7 @@ HEADERS += \
     GUIHelper.h \
     FileChooser.h \
     ClickableLabel.h \
+    ClickableLineEdit.h \
     ColorSelector.h \
     ScrollableTextDialog.h \
     BusyDialog.h
