@@ -5,7 +5,14 @@ ClickableLabel::ClickableLabel(QWidget* parent)
 {
 }
 
-void ClickableLabel::mouseReleaseEvent(QMouseEvent* event)
+void ClickableLabel::mouseReleaseEvent(QMouseEvent* e)
 {
-	emit clicked(event->pos());
+	if (e->button()!=Qt::LeftButton)
+	{
+		e->ignore();
+		return;
+	}
+
+	e->accept();
+	emit clicked(e->pos());
 }

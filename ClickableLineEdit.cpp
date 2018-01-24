@@ -5,7 +5,14 @@ ClickableLineEdit::ClickableLineEdit(QWidget* parent)
 {
 }
 
-void ClickableLineEdit::mouseReleaseEvent(QMouseEvent* event)
+void ClickableLineEdit::mouseReleaseEvent(QMouseEvent* e)
 {
-	emit clicked(event->pos());
+	if (e->button()!=Qt::LeftButton)
+	{
+		e->ignore();
+		return;
+	}
+
+	e->accept();
+	emit clicked(e->pos());
 }
