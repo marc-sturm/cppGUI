@@ -31,7 +31,7 @@ public:
 
 protected:
 	///Constructor declared away.
-	GUIHelper();
+	GUIHelper() = delete;
 };
 
 #endif
