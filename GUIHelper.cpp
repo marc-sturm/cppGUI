@@ -4,7 +4,7 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QDialogButtonBox>
-#include <QDebug>
+#include <QClipboard>
 
 void GUIHelper::showMessage(QString title, QString message, QMap<QString, QString> add_info)
 {
@@ -104,6 +104,33 @@ void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width)
 			widget->setRowHeight(i, height);
 		}
 	}
+}
+
+void GUIHelper::copyToClipboard(const QTableWidget* table)
+{
+	//header
+	QString output = "#";
+	for (int col=0; col<table->columnCount(); ++col)
+	{
+		if (col!=0) output += "\t";
+		output += table->horizontalHeaderItem(col)->text();
+	}
+	output += "\n";
+
+	//rows
+	for (int row=0; row<table->rowCount(); ++row)
+	{
+		if (table->isRowHidden(row)) continue;
+
+		for (int col=0; col<table->columnCount(); ++col)
+		{
+			if (col!=0) output += "\t";
+			output += table->item(row, col)->text();
+		}
+		output += "\n";
+	}
+
+	QApplication::clipboard()->setText(output);
 }
 
 QFrame* GUIHelper::horizontalLine()

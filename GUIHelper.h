@@ -26,6 +26,9 @@ public:
 	///Resize column width and hight
 	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1);
 
+	///Copy all content of a table widget to the clipboard
+	static void copyToClipboard(const QTableWidget* table);
+
 	///Creates a horizontal line
 	static QFrame* horizontalLine();
 
