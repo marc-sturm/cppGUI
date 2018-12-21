@@ -14,5 +14,5 @@ void ClickableLabel::mouseReleaseEvent(QMouseEvent* e)
 	}
 
 	e->accept();
-	emit clicked(e->pos());
+	emit clicked(e->globalPos());
 }

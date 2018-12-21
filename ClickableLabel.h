@@ -13,9 +13,12 @@ class CPPGUISHARED_EXPORT ClickableLabel
 
 public:
 	ClickableLabel(QWidget* parent = 0);
+
+protected:
 	void mouseReleaseEvent(QMouseEvent* event);
 
 signals:
+	///Signal that is emitted when the label is clicked - the position is global!
 	void clicked(QPoint pos);
 };
 
