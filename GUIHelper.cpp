@@ -63,8 +63,15 @@ QSharedPointer<QDialog> GUIHelper::showWidgetAsDialog(QWidget* widget, QString t
 
 void GUIHelper::styleSplitter(QSplitter* splitter)
 {
-	splitter->setHandleWidth(1);
-	splitter->setStyleSheet("QSplitter::handle { background-color: #666666; margin: 1px; }");
+	splitter->setHandleWidth(5);
+	if (splitter->orientation()==Qt::Vertical)
+	{
+		splitter->setStyleSheet("QSplitter::handle:vertical { image: url(:/Icons/Splitter_vertical.png); } ");
+	}
+	else
+	{
+		splitter->setStyleSheet("QSplitter::handle:horizontal { image: url(:/Icons/Splitter_horizontal.png); } ");
+	}
 }
 
 void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width)
