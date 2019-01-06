@@ -29,7 +29,7 @@ void GUIHelper::showMessage(QString title, QString message, QMap<QString, QStrin
 	dialog->exec();
 }
 
-QSharedPointer<QDialog> GUIHelper::showWidgetAsDialog(QWidget* widget, QString title, bool buttons, bool modal)
+QSharedPointer<QDialog> GUIHelper::createDialog(QWidget* widget, QString title, QString label, bool add_buttons)
 {
 	QSharedPointer<QDialog> dialog = QSharedPointer<QDialog>(new QDialog(QApplication::activeWindow()));
 	dialog->setWindowFlags(Qt::Window);
@@ -37,25 +37,19 @@ QSharedPointer<QDialog> GUIHelper::showWidgetAsDialog(QWidget* widget, QString t
 
 	dialog->setLayout(new QBoxLayout(QBoxLayout::TopToBottom));
 	dialog->layout()->setMargin(3);
+	if (!label.isEmpty())
+	{
+		dialog->layout()->addWidget(new QLabel(label));
+	}
 	dialog->layout()->addWidget(widget);
 
 	//add buttons
-	if (buttons)
+	if (add_buttons)
 	{
 		QDialogButtonBox* button_box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 		dialog->connect(button_box, SIGNAL(accepted()), dialog.data(), SLOT(accept()));
 		dialog->connect(button_box, SIGNAL(rejected()), dialog.data(), SLOT(reject()));
 		dialog->layout()->addWidget(button_box);
-	}
-
-	//show dialog
-	if (modal)
-	{
-		dialog->exec();
-	}
-	else
-	{
-		dialog->show();
 	}
 
 	return dialog;
