@@ -15,7 +15,7 @@ public:
 
 
 protected:
-	QrCode() = delete;
+	QrCodeFactory() = delete;
 };
 
 #endif // QRCODEGENERATOR_H
