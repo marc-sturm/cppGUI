@@ -31,7 +31,11 @@ SOURCES += \
     ClickableLineEdit.cpp \
     ColorSelector.cpp \
     ScrollableTextDialog.cpp \
-    BusyDialog.cpp
+    BusyDialog.cpp \
+    QrCodeGenerator/BitBuffer.cpp \
+    QrCodeGenerator/QrCode.cpp \
+    QrCodeGenerator/QrSegment.cpp \
+    QrCodeFactory.cpp
 
 HEADERS += \
     Application.h \
@@ -41,7 +45,11 @@ HEADERS += \
     ClickableLineEdit.h \
     ColorSelector.h \
     ScrollableTextDialog.h \
-    BusyDialog.h
+    BusyDialog.h \
+    QrCodeGenerator/BitBuffer.h \
+    QrCodeGenerator/QrCode.h \
+    QrCodeGenerator/QrSegment.h \
+    QrCodeFactory.h
     
 RESOURCES += \
     resources.qrc
