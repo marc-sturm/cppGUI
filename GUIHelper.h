@@ -2,11 +2,17 @@
 #define GUIHELPER_H
 
 #include "cppGUI_global.h"
+#include "Histogram.h"
 #include <QString>
 #include <QMap>
 #include <QWidget>
 #include <QSplitter>
 #include <QTableWidget>
+
+namespace QtCharts
+{
+   class QChartView; //forward declaration so that not all tools need to import the Qt charts namespace
+}
 
 ///Auxilary helper functions for the GUI.
 class CPPGUISHARED_EXPORT GUIHelper
@@ -29,6 +35,8 @@ public:
 
 	///Creates a horizontal line
 	static QFrame* horizontalLine();
+
+	static QtCharts::QChartView* histogramChart(const Histogram& hist, QString title);
 
 protected:
 	///Constructor declared away.

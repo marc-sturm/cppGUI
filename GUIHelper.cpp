@@ -5,6 +5,12 @@
 #include <QLabel>
 #include <QDialogButtonBox>
 #include <QClipboard>
+#include <QBarSet>
+#include <QBarSeries>
+#include <QBarCategoryAxis>
+#include <QChartView>
+
+QT_CHARTS_USE_NAMESPACE
 
 void GUIHelper::showMessage(QString title, QString message, QMap<QString, QString> add_info)
 {
@@ -143,4 +149,36 @@ QFrame* GUIHelper::horizontalLine()
 	line->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 	line->setMinimumHeight(3);
 	return line;
+}
+
+QChartView* GUIHelper::histogramChart(const Histogram& hist, QString title)
+{
+	QBarSet* set = new QBarSet(title);
+	for(int bin=0; bin<hist.binCount(); ++bin)
+	{
+		set->append(hist.binValue(bin, true));
+	}
+
+	QBarSeries* series = new QBarSeries();
+	series->append(set);
+	QChart* chart = new QChart();
+	chart->addSeries(series);
+	chart->legend()->setVisible(false);
+	chart->createDefaultAxes();
+	chart->axisY()->setTitleText("%");
+	QBarCategoryAxis* x_axis = new QBarCategoryAxis();
+	for(int bin=0; bin<hist.binCount(); ++bin)
+	{
+		double start = hist.startOfBin(bin);
+		x_axis->append(QString::number(start, 'f', 2) + "-" + QString::number(start+hist.binSize(), 'f', 2));
+	}
+	x_axis->setTitleText(title);
+	x_axis->setLabelsAngle(90);
+	chart->setAxisX(x_axis);
+
+	QChartView* view = new QChartView(chart);
+	view->setRenderHint(QPainter::Antialiasing);
+	view->setMinimumSize(800, 600);
+
+	return view;
 }

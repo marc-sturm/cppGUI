@@ -2,7 +2,7 @@
 CONFIG += c++11 
 
 #base settings
-QT       += gui widgets
+QT       += gui widgets charts
 TEMPLATE = lib
 TARGET = cppGUI
 DEFINES += CPPGUI_LIBRARY
