@@ -178,7 +178,7 @@ QChartView* GUIHelper::histogramChart(const Histogram& hist, QString title)
 
 	QChartView* view = new QChartView(chart);
 	view->setRenderHint(QPainter::Antialiasing);
-	view->setMinimumSize(800, 600);
+	view->setMinimumSize(1000, 800);
 
 	return view;
 }
