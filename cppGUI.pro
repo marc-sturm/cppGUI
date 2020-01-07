@@ -35,7 +35,8 @@ SOURCES += \
     QrCodeGenerator/BitBuffer.cpp \
     QrCodeGenerator/QrCode.cpp \
     QrCodeGenerator/QrSegment.cpp \
-    QrCodeFactory.cpp
+    QrCodeFactory.cpp \
+    DelayedInitializationTimer.cpp
 
 HEADERS += \
     Application.h \
@@ -49,7 +50,8 @@ HEADERS += \
     QrCodeGenerator/BitBuffer.h \
     QrCodeGenerator/QrCode.h \
     QrCodeGenerator/QrSegment.h \
-    QrCodeFactory.h
+    QrCodeFactory.h \
+    DelayedInitializationTimer.h
     
 RESOURCES += \
     resources.qrc
