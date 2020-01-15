@@ -182,3 +182,15 @@ QChartView* GUIHelper::histogramChart(const Histogram& hist, QString title)
 
 	return view;
 }
+
+QCompleter*GUIHelper::completer(QObject* parent, const QStringList& items)
+{
+	QCompleter* completer = new QCompleter(items, parent);
+
+	completer->setCompletionMode(QCompleter::PopupCompletion);
+	completer->setCaseSensitivity(Qt::CaseInsensitive);
+	completer->setFilterMode(Qt::MatchContains);
+	completer->setCompletionRole(Qt::DisplayRole);
+
+	return completer;
+}

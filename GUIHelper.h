@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QSplitter>
 #include <QTableWidget>
+#include <QCompleter>
 
 namespace QtCharts
 {
@@ -36,7 +37,11 @@ public:
 	///Creates a horizontal line
 	static QFrame* horizontalLine();
 
+	///Creates a chart with a histogram
 	static QtCharts::QChartView* histogramChart(const Histogram& hist, QString title);
+
+	///Creates a list-based auto-completer
+	static QCompleter* completer(QObject* parent, const QStringList& items);
 
 protected:
 	///Constructor declared away.
