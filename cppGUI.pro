@@ -36,7 +36,8 @@ SOURCES += \
     QrCodeGenerator/QrCode.cpp \
     QrCodeGenerator/QrSegment.cpp \
     QrCodeFactory.cpp \
-    DelayedInitializationTimer.cpp
+    DelayedInitializationTimer.cpp \
+    TsvTableWidget.cpp
 
 HEADERS += \
     Application.h \
@@ -51,11 +52,13 @@ HEADERS += \
     QrCodeGenerator/QrCode.h \
     QrCodeGenerator/QrSegment.h \
     QrCodeFactory.h \
-    DelayedInitializationTimer.h
+    DelayedInitializationTimer.h \
+    TsvTableWidget.h
     
 RESOURCES += \
     resources.qrc
 
 FORMS += \
     ScrollableTextDialog.ui \
-    BusyDialog.ui
+    BusyDialog.ui \
+    TsvTableWidget.ui
