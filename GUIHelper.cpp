@@ -74,7 +74,7 @@ void GUIHelper::styleSplitter(QSplitter* splitter)
 	}
 }
 
-void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width)
+void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool first_height_for_all)
 {
 	//resize columns width
 	widget->resizeColumnsToContents();
@@ -92,25 +92,45 @@ void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width)
 	}
 
 	//determine row height
-	int height = -1;
-	for (int i=0; i<widget->rowCount(); ++i)
+	if (first_height_for_all)
 	{
-		if (!widget->isRowHidden(i))
-		{
-			widget->resizeRowToContents(i);
-			height = widget->rowHeight(i);
-			break;
-		}
-	}
-
-	//set row height
-	if (height!=-1)
-	{
+		int height = -1;
 		for (int i=0; i<widget->rowCount(); ++i)
 		{
-			widget->setRowHeight(i, height);
+			if (!widget->isRowHidden(i))
+			{
+				widget->resizeRowToContents(i);
+				height = widget->rowHeight(i);
+				break;
+			}
+		}
+
+		//set row height
+		if (height!=-1)
+		{
+			for (int i=0; i<widget->rowCount(); ++i)
+			{
+				widget->setRowHeight(i, height);
+			}
 		}
 	}
+	else
+	{
+		widget->resizeRowsToContents();
+	}
+}
+
+QTableWidgetItem* GUIHelper::createTableItem(const QString& text, int alignment, bool editable)
+{
+	QTableWidgetItem* item = new QTableWidgetItem(text);
+
+	item->setTextAlignment(alignment);
+	if (!editable)
+	{
+		item->setFlags(item->flags()& (~Qt::ItemIsEditable));
+	}
+
+	return item;
 }
 
 void GUIHelper::copyToClipboard(const QTableWidget* table)

@@ -29,7 +29,10 @@ public:
 	static void styleSplitter(QSplitter* splitter);
 
 	///Resize column width and hight
-	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1);
+	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1, bool first_height_for_all=true);
+
+	///Creates a table cell item
+	static QTableWidgetItem* createTableItem(const QString& text, int alignment=Qt::AlignLeft|Qt::AlignTop, bool editable=false);
 
 	///Copy all content of a table widget to the clipboard
 	static void copyToClipboard(const QTableWidget* table);
