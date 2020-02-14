@@ -9,6 +9,7 @@
 #include <QBarSeries>
 #include <QBarCategoryAxis>
 #include <QChartView>
+#include <QDebug>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -139,10 +140,10 @@ void GUIHelper::copyToClipboard(const QTableWidget* table)
 	QString output = "#";
 	for (int col=0; col<table->columnCount(); ++col)
 	{
-		if (col!=0) output += "\t";
+		if (col!=0) output += '\t';
 		output += table->horizontalHeaderItem(col)->text();
 	}
-	output += "\n";
+	output += '\n';
 
 	//rows
 	for (int row=0; row<table->rowCount(); ++row)
@@ -151,10 +152,25 @@ void GUIHelper::copyToClipboard(const QTableWidget* table)
 
 		for (int col=0; col<table->columnCount(); ++col)
 		{
-			if (col!=0) output += "\t";
-			output += table->item(row, col)->text();
+			if (col!=0) output += '\t';
+
+			QString text = "";
+			if (table->item(row, col)!=nullptr)
+			{
+				text = table->item(row, col)->text();
+			}
+			else if (qobject_cast<QLabel*>(table->cellWidget(row, col))!=nullptr)
+			{
+				QLabel* label = qobject_cast<QLabel*>(table->cellWidget(row, col));
+				text = label->text();
+			}
+			else if (table->cellWidget(row, col)!=nullptr)
+			{
+				qDebug() << "Unhandled table item type in copyToClipboard!";
+			}
+			output += text.replace('\t', ' ').replace('\n', ' ').replace('\r', ' ').trimmed();
 		}
-		output += "\n";
+		output += '\n';
 	}
 
 	QApplication::clipboard()->setText(output);
