@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QMouseEvent>
 
-///Label with clicked(QPoint) event.
+///Label with clicked(QPoint) event and that can open URLs itself.
 class CPPGUISHARED_EXPORT ClickableLabel
 		: public QLabel
 {
@@ -16,6 +16,9 @@ public:
 
 protected:
 	void mouseReleaseEvent(QMouseEvent* event);
+
+protected slots:
+	void openUrl(QString url);
 
 signals:
 	///Signal that is emitted when the label is clicked - the position is global!

@@ -3,6 +3,7 @@
 
 #include "cppGUI_global.h"
 #include "Histogram.h"
+#include "ClickableLabel.h"
 #include <QString>
 #include <QMap>
 #include <QWidget>
@@ -32,7 +33,10 @@ public:
 	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1, bool first_height_for_all=true);
 
 	///Creates a table cell item
-	static QTableWidgetItem* createTableItem(const QString& text, int alignment=Qt::AlignLeft|Qt::AlignTop, bool editable=false);
+	static QTableWidgetItem* createTableItem(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, bool editable=false);
+
+	///Creates a label that can open links in the text.
+	static ClickableLabel* createLinkLabel(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop);
 
 	///Copy all content of a table widget to the clipboard
 	static void copyToClipboard(const QTableWidget* table);

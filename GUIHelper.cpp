@@ -121,7 +121,7 @@ void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool f
 	}
 }
 
-QTableWidgetItem* GUIHelper::createTableItem(const QString& text, int alignment, bool editable)
+QTableWidgetItem* GUIHelper::createTableItem(const QString& text, Qt::Alignment alignment, bool editable)
 {
 	QTableWidgetItem* item = new QTableWidgetItem(text);
 
@@ -132,6 +132,17 @@ QTableWidgetItem* GUIHelper::createTableItem(const QString& text, int alignment,
 	}
 
 	return item;
+}
+
+ClickableLabel* GUIHelper::createLinkLabel(const QString& text, Qt::Alignment alignment)
+{
+	ClickableLabel* label = new ClickableLabel();
+
+	label->setText(text);
+	label->setAlignment(alignment);
+	label->setOpenExternalLinks(true);
+
+	return label;
 }
 
 void GUIHelper::copyToClipboard(const QTableWidget* table)
