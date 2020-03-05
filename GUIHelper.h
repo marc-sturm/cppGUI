@@ -36,7 +36,7 @@ public:
 	static QTableWidgetItem* createTableItem(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, bool editable=false);
 
 	///Creates a label that can open links in the text.
-	static ClickableLabel* createLinkLabel(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop);
+	static QLabel* createLinkLabel(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop);
 
 	///Copy all content of a table widget to the clipboard
 	static void copyToClipboard(const QTableWidget* table);

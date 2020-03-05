@@ -4,7 +4,6 @@
 ClickableLabel::ClickableLabel(QWidget* parent)
 	: QLabel(parent)
 {
-	connect(this, SIGNAL(linkActivated(QString)), this, SLOT(openUrl(QString)));
 }
 
 void ClickableLabel::mouseReleaseEvent(QMouseEvent* e)
@@ -17,9 +16,4 @@ void ClickableLabel::mouseReleaseEvent(QMouseEvent* e)
 
 	e->accept();
 	emit clicked(e->globalPos());
-}
-
-void ClickableLabel::openUrl(QString url)
-{
-	QDesktopServices::openUrl(QUrl(url));
 }

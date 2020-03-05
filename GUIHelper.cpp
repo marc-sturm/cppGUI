@@ -134,9 +134,9 @@ QTableWidgetItem* GUIHelper::createTableItem(const QString& text, Qt::Alignment 
 	return item;
 }
 
-ClickableLabel* GUIHelper::createLinkLabel(const QString& text, Qt::Alignment alignment)
+QLabel* GUIHelper::createLinkLabel(const QString& text, Qt::Alignment alignment)
 {
-	ClickableLabel* label = new ClickableLabel();
+	QLabel* label = new QLabel();
 
 	label->setText(text);
 	label->setAlignment(alignment);
