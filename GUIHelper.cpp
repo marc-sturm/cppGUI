@@ -46,7 +46,9 @@ QSharedPointer<QDialog> GUIHelper::createDialog(QWidget* widget, QString title, 
 	dialog->layout()->setMargin(3);
 	if (!label.isEmpty())
 	{
-		dialog->layout()->addWidget(new QLabel(label));
+		QLabel* label_widget = new QLabel(label);
+		label_widget->setTextFormat(Qt::RichText);
+		dialog->layout()->addWidget(label_widget);
 	}
 	dialog->layout()->addWidget(widget);
 
