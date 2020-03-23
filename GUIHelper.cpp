@@ -140,6 +140,7 @@ QLabel* GUIHelper::createLinkLabel(const QString& text, Qt::Alignment alignment)
 {
 	QLabel* label = new QLabel();
 
+	label->setMargin(2);
 	label->setText(text);
 	label->setAlignment(alignment);
 	label->setOpenExternalLinks(true);
