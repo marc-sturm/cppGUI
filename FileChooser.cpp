@@ -47,7 +47,7 @@ void FileChooser::browseFile()
 
 	if (type_==LOAD)
 	{
-		file = QFileDialog::getOpenFileName(this, "Select input file.", Settings::path("open_data_folder"), "*.*");
+		file = QFileDialog::getOpenFileName(this, "Select input file.", Settings::path("open_data_folder", true), "*.*");
 		if (file!="")
 		{
 			Settings::setPath("open_data_folder", file);
@@ -55,7 +55,7 @@ void FileChooser::browseFile()
 	}
 	else
 	{
-		file = QFileDialog::getSaveFileName(this, "Select output file.", Settings::path("store_data_folder"), "*.*");
+		file = QFileDialog::getSaveFileName(this, "Select output file.", Settings::path("store_data_folder", true), "*.*");
 		if (file!="")
 		{
 			Settings::setPath("store_data_folder", file);
