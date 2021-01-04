@@ -30,7 +30,7 @@ public:
 	static void styleSplitter(QSplitter* splitter);
 
 	///Resize column width and hight
-	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1, bool first_height_for_all=true);
+	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1, bool first_height_for_all=true, int rows_used_for_column_width=1000);
 
 	///Creates a table cell item
 	static QTableWidgetItem* createTableItem(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, bool editable=false);

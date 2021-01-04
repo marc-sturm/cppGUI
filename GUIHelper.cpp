@@ -10,6 +10,7 @@
 #include <QBarCategoryAxis>
 #include <QChartView>
 #include <QDebug>
+#include <QHeaderView>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -77,9 +78,10 @@ void GUIHelper::styleSplitter(QSplitter* splitter)
 	}
 }
 
-void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool first_height_for_all)
+void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool first_height_for_all, int rows_used_for_column_width)
 {
 	//resize columns width
+	widget->horizontalHeader()->setResizeContentsPrecision(rows_used_for_column_width);
 	widget->resizeColumnsToContents();
 
 	//restrict width
