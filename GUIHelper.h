@@ -39,7 +39,7 @@ public:
 	static QLabel* createLinkLabel(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop);
 
 	///Copy all content of a table widget to the clipboard
-	static void copyToClipboard(const QTableWidget* table);
+	static void copyToClipboard(const QTableWidget* table, bool selected_rows_only=false);
 
 	///Creates a horizontal line
 	static QFrame* horizontalLine();

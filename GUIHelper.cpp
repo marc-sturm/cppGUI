@@ -150,8 +150,21 @@ QLabel* GUIHelper::createLinkLabel(const QString& text, Qt::Alignment alignment)
 	return label;
 }
 
-void GUIHelper::copyToClipboard(const QTableWidget* table)
+void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_only)
 {
+	//get selected rows
+	QSet<int> selected_rows;
+	if (selected_rows_only)
+	{
+		foreach(const QTableWidgetSelectionRange& range, table->selectedRanges())
+		{
+			for (int row=range.topRow(); row<=range.bottomRow(); ++row)
+			{
+				selected_rows << row;
+			}
+		}
+	}
+
 	//header
 	QString output = "#";
 	for (int col=0; col<table->columnCount(); ++col)
@@ -166,6 +179,8 @@ void GUIHelper::copyToClipboard(const QTableWidget* table)
 	{
 		if (table->isRowHidden(row)) continue;
 
+		if (selected_rows_only && !selected_rows.contains(row)) continue;
+
 		for (int col=0; col<table->columnCount(); ++col)
 		{
 			if (col!=0) output += '\t';
@@ -175,14 +190,13 @@ void GUIHelper::copyToClipboard(const QTableWidget* table)
 			{
 				text = table->item(row, col)->text();
 			}
-			else if (qobject_cast<QLabel*>(table->cellWidget(row, col))!=nullptr)
+			else if (table->cellWidget(row, col)->inherits("QLabel"))
 			{
-				QLabel* label = qobject_cast<QLabel*>(table->cellWidget(row, col));
-				text = label->text();
+				text = qobject_cast<QLabel*>(table->cellWidget(row, col))->text();
 			}
 			else if (table->cellWidget(row, col)!=nullptr)
 			{
-				qDebug() << "Unhandled table item type in copyToClipboard!";
+				qDebug() << "Unhandled table item type " + QString(table->cellWidget(row, col)->metaObject()->className()) + " in copyToClipboard!";
 			}
 			output += text.replace('\t', ' ').replace('\n', ' ').replace('\r', ' ').trimmed();
 		}
