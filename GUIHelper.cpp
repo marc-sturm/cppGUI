@@ -170,7 +170,7 @@ void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_on
 	for (int col=0; col<table->columnCount(); ++col)
 	{
 		if (col!=0) output += '\t';
-		output += table->horizontalHeaderItem(col)->text();
+		output += table->horizontalHeaderItem(col)->text().replace('\t', ' ').replace('\n', ' ').replace('\r', ' ').trimmed();
 	}
 	output += '\n';
 
