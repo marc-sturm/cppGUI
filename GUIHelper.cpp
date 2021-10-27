@@ -186,17 +186,25 @@ void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_on
 			if (col!=0) output += '\t';
 
 			QString text = "";
-			if (table->item(row, col)!=nullptr)
+			QTableWidgetItem* item  = table->item(row, col);
+			if (item!=nullptr)
 			{
-				text = table->item(row, col)->text();
+				text = item->text();
 			}
-			else if (table->cellWidget(row, col)->inherits("QLabel"))
+			else
 			{
-				text = qobject_cast<QLabel*>(table->cellWidget(row, col))->text();
-			}
-			else if (table->cellWidget(row, col)!=nullptr)
-			{
-				qDebug() << "Unhandled table item type " + QString(table->cellWidget(row, col)->metaObject()->className()) + " in copyToClipboard!";
+				QWidget* cell_widget = table->cellWidget(row, col);
+				if (cell_widget!=nullptr)
+				{
+					if (cell_widget->inherits("QLabel"))
+					{
+						text = qobject_cast<QLabel*>(cell_widget)->text();
+					}
+					else
+					{
+						qDebug() << "Unhandled table item type " + QString(cell_widget->metaObject()->className()) + " in copyToClipboard!";
+					}
+				}
 			}
 			output += text.replace('\t', ' ').replace('\n', ' ').replace('\r', ' ').trimmed();
 		}
