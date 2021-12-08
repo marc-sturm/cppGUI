@@ -38,6 +38,12 @@ public:
 	///Creates a label that can open links in the text.
 	static QLabel* createLinkLabel(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop);
 
+	///Returns the selected rows of a table (sorted ascending)
+	static QList<int> selectedTableRows(const QTableWidget* table, bool skip_hidden=true);
+
+	///Returns the selected columns of a table (sorted ascending)
+	static QList<int> selectedTableColumns(const QTableWidget* table, bool skip_hidden=true);
+
 	///Copy all content of a table widget to the clipboard
 	static void copyToClipboard(const QTableWidget* table, bool selected_rows_only=false);
 

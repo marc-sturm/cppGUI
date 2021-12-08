@@ -150,20 +150,47 @@ QLabel* GUIHelper::createLinkLabel(const QString& text, Qt::Alignment alignment)
 	return label;
 }
 
+QList<int> GUIHelper::selectedTableRows(const QTableWidget* table, bool skip_hidden)
+{
+	QList<int> output;
+
+	QList<QTableWidgetSelectionRange> ranges = table->selectedRanges();
+	foreach(const QTableWidgetSelectionRange& range, ranges)
+	{
+		for (int r=range.topRow(); r<=range.bottomRow(); ++r)
+		{
+			if (skip_hidden && table->isRowHidden(r)) continue;
+			output << r;
+		}
+	}
+
+	std::sort(output.begin(), output.end());
+
+	return output;
+}
+
+QList<int> GUIHelper::selectedTableColumns(const QTableWidget* table, bool skip_hidden)
+{
+	QList<int> output;
+
+	foreach(const QTableWidgetSelectionRange& range, table->selectedRanges())
+	{
+		for (int c=range.leftColumn(); c<=range.rightColumn(); ++c)
+		{
+			if (skip_hidden && table->isColumnHidden(c)) continue;
+			output << c;
+		}
+	}
+
+	std::sort(output.begin(), output.end());
+
+	return output;
+}
+
 void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_only)
 {
 	//get selected rows
-	QSet<int> selected_rows;
-	if (selected_rows_only)
-	{
-		foreach(const QTableWidgetSelectionRange& range, table->selectedRanges())
-		{
-			for (int row=range.topRow(); row<=range.bottomRow(); ++row)
-			{
-				selected_rows << row;
-			}
-		}
-	}
+	QSet<int> selected_rows = selectedTableRows(table).toSet();
 
 	//header
 	QString output = "#";
