@@ -56,6 +56,9 @@ public:
 	///Creates a list-based auto-completer
 	static QCompleter* completer(QObject* parent, const QStringList& items);
 
+	///Returns a color in Qt StyleSheet format
+	static QString colorToQssFormat(const QColor &color);
+
 protected:
 	///Constructor declared away.
 	GUIHelper() = delete;

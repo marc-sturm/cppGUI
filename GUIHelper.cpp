@@ -295,3 +295,13 @@ QCompleter*GUIHelper::completer(QObject* parent, const QStringList& items)
 
 	return completer;
 }
+
+QString GUIHelper::colorToQssFormat(const QColor& color)
+{
+	return QString("rgba(%1, %2, %3, %4)")
+			.arg(color.red())
+			.arg(color.green())
+			.arg(color.blue())
+			.arg(color.alpha());
+}
+
