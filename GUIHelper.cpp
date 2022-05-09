@@ -309,12 +309,11 @@ QString GUIHelper::colorToQssFormat(const QColor& color)
 void GUIHelper::showException(QWidget* parent, Exception& e, QString title)
 {
 	//reset override cursor
-	qDebug() << QApplication::overrideCursor();
 	while(QApplication::overrideCursor()!=nullptr)
 	{
+		qDebug() << __LINE__ << QApplication::overrideCursor();
 		QApplication::restoreOverrideCursor();
 	}
-	qDebug() << QApplication::overrideCursor();
 
 	//show dialog to user
 	if (e.type()==ExceptionType::CRITIAL)
