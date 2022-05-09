@@ -3,6 +3,7 @@
 
 #include "cppGUI_global.h"
 #include "Histogram.h"
+#include "Exceptions.h"
 #include "ClickableLabel.h"
 #include <QString>
 #include <QMap>
@@ -58,6 +59,11 @@ public:
 
 	///Returns a color in Qt StyleSheet format
 	static QString colorToQssFormat(const QColor &color);
+
+	///Shows an error message to the user.
+	///If the excpetion is expected (see Excpetion::isExpected), a information dialog is shown. Otherwise, a critical dialog is shown.
+	///If a override cursor is set, it is removed before showing the dialog.
+	static void showException(QWidget* parent, Exception& e, QString title);
 
 protected:
 	///Constructor declared away.

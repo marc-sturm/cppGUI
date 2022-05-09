@@ -11,6 +11,7 @@
 #include <QChartView>
 #include <QDebug>
 #include <QHeaderView>
+#include <QMessageBox>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -303,5 +304,30 @@ QString GUIHelper::colorToQssFormat(const QColor& color)
 			.arg(color.green())
 			.arg(color.blue())
 			.arg(color.alpha());
+}
+
+void GUIHelper::showException(QWidget* parent, Exception& e, QString title)
+{
+	//reset override cursor
+	qDebug() << QApplication::overrideCursor();
+	while(QApplication::overrideCursor()!=nullptr)
+	{
+		QApplication::restoreOverrideCursor();
+	}
+	qDebug() << QApplication::overrideCursor();
+
+	//show dialog to user
+	if (e.type()==ExceptionType::CRITIAL)
+	{
+		QMessageBox::critical(parent, title, "Critical error - this should probably not happen:\n" + e.message());
+	}
+	else if (e.type()==ExceptionType::WARNING)
+	{
+		QMessageBox::warning(parent, title, e.message());
+	}
+	else
+	{
+		QMessageBox::information(parent, title, e.message());
+	}
 }
 
