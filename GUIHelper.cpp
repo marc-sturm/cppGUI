@@ -311,7 +311,6 @@ void GUIHelper::showException(QWidget* parent, Exception& e, QString title)
 	//reset override cursor
 	while(QApplication::overrideCursor()!=nullptr)
 	{
-		qDebug() << __LINE__ << QApplication::overrideCursor();
 		QApplication::restoreOverrideCursor();
 	}
 
