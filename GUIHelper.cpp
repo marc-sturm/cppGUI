@@ -253,16 +253,27 @@ QFrame* GUIHelper::horizontalLine()
 	return line;
 }
 
-QChartView* GUIHelper::histogramChart(const Histogram& hist, QString title)
+QChartView* GUIHelper::histogramChart(const Histogram& hist, QString title, int highlight_bin)
 {
 	QBarSet* set = new QBarSet(title);
+	QBarSet* highlight_set = new QBarSet(title);
+	highlight_set->setColor(QColor("red"));
 	for(int bin=0; bin<hist.binCount(); ++bin)
 	{
+		if(bin == highlight_bin)
+		{
+			highlight_set->append(hist.binValue(bin, true));
+			set->append(0.0);
+			continue;
+		}
+		highlight_set->append(0.0);
 		set->append(hist.binValue(bin, true));
+
 	}
 
 	QBarSeries* series = new QBarSeries();
 	series->append(set);
+	if (highlight_bin >= 0)	series->append(highlight_set);
 	QChart* chart = new QChart();
 	chart->addSeries(series);
 	chart->legend()->setVisible(false);

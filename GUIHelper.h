@@ -52,7 +52,7 @@ public:
 	static QFrame* horizontalLine();
 
 	///Creates a chart with a histogram
-	static QtCharts::QChartView* histogramChart(const Histogram& hist, QString title);
+	static QtCharts::QChartView* histogramChart(const Histogram& hist, QString title, int highlight_bin=-1);
 
 	///Creates a list-based auto-completer
 	static QCompleter* completer(QObject* parent, const QStringList& items);
