@@ -48,6 +48,9 @@ public:
 	///Copy all content of a table widget to the clipboard
 	static void copyToClipboard(const QTableWidget* table, bool selected_rows_only=false);
 
+	///Returns the index of the given column. If the column is not found, a ArgumentException is thrown or -1 is returned (if throw_if_not_found is set to false).
+	static int columnIndex(const QTableWidget* table, QString column, bool throw_if_not_found=true);
+
 	///Creates a horizontal line
 	static QFrame* horizontalLine();
 

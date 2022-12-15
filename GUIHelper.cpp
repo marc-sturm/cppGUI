@@ -242,6 +242,21 @@ void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_on
 	QApplication::clipboard()->setText(output);
 }
 
+int GUIHelper::columnIndex(const QTableWidget* table, QString column, bool throw_if_not_found)
+{
+	for (int c=0; c<table->columnCount(); ++c)
+	{
+		if (table->horizontalHeaderItem(c)->text()==column)
+		{
+			return c;
+		}
+	}
+
+	if (throw_if_not_found)	THROW(ArgumentException, "Could not find column with name '" + column + "' in table!");
+
+	return -1;
+}
+
 QFrame* GUIHelper::horizontalLine()
 {
 	QFrame* line = new QFrame();
