@@ -8,6 +8,7 @@
 #include <QBarSet>
 #include <QBarSeries>
 #include <QBarCategoryAxis>
+#include <QValueAxis>
 #include <QChartView>
 #include <QDebug>
 #include <QHeaderView>
@@ -293,16 +294,21 @@ QChartView* GUIHelper::histogramChart(const Histogram& hist, QString title, int 
 	chart->addSeries(series);
 	chart->legend()->setVisible(false);
 	chart->createDefaultAxes();
-	chart->axisY()->setTitleText("%");
-	QBarCategoryAxis* x_axis = new QBarCategoryAxis();
+
+	QValueAxis* y_axis = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).at(0));
+	y_axis->setTitleText("%");
+	y_axis->setTickCount(8);
+
+	QBarCategoryAxis* x_axis = qobject_cast<QBarCategoryAxis*>(chart->axes(Qt::Horizontal).at(0));
+	QStringList categories;
 	for(int bin=0; bin<hist.binCount(); ++bin)
 	{
 		double start = hist.startOfBin(bin);
-		x_axis->append(QString::number(start, 'f', 2) + "-" + QString::number(start+hist.binSize(), 'f', 2));
+		categories << QString::number(start, 'f', 2) + "-" + QString::number(start+hist.binSize(), 'f', 2);
 	}
+	x_axis->setCategories(categories);
 	x_axis->setTitleText(title);
 	x_axis->setLabelsAngle(90);
-	chart->setAxisX(x_axis);
 
 	QChartView* view = new QChartView(chart);
 	view->setRenderHint(QPainter::Antialiasing);
