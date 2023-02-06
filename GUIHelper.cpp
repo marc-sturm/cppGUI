@@ -127,17 +127,40 @@ void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool f
 	}
 }
 
-QTableWidgetItem* GUIHelper::createTableItem(const QString& text, Qt::Alignment alignment, bool editable)
+QTableWidgetItem* GUIHelper::createTableItem(const QString& text, Qt::Alignment alignment, Qt::ItemFlags flags)
 {
 	QTableWidgetItem* item = new QTableWidgetItem(text);
-
 	item->setTextAlignment(alignment);
-	if (!editable)
-	{
-		item->setFlags(item->flags()& (~Qt::ItemIsEditable));
-	}
-
+	item->setFlags(flags);
 	return item;
+}
+
+QTableWidgetItem* GUIHelper::createTableItem(int value, Qt::Alignment alignment, Qt::ItemFlags flags)
+{
+	QTableWidgetItem* item = new QTableWidgetItem;
+	item->setData(Qt::EditRole, value);
+	item->setTextAlignment(alignment);
+	item->setFlags(flags);
+	return item;
+}
+
+QTableWidgetItem* GUIHelper::createTableItem(double value, int prec, Qt::Alignment alignment, Qt::ItemFlags flags)
+{
+	QTableWidgetItem* item = new QTableWidgetItem;
+	item->setData(Qt::EditRole, QString::number(value, 'f', prec).toDouble());
+	item->setTextAlignment(alignment);
+	item->setFlags(flags);
+	return item;
+}
+
+QTableWidgetItem* GUIHelper::createTableItem(const QByteArray& text, Qt::Alignment alignment, Qt::ItemFlags flags)
+{
+	return createTableItem(QString(text), alignment, flags);
+}
+
+QTableWidgetItem* GUIHelper::createTableItem(const char* text, Qt::Alignment alignment, Qt::ItemFlags flags)
+{
+	return createTableItem(QString(text), alignment, flags);
 }
 
 QLabel* GUIHelper::createLinkLabel(const QString& text, Qt::Alignment alignment)
@@ -189,13 +212,22 @@ QList<int> GUIHelper::selectedTableColumns(const QTableWidget* table, bool skip_
 	return output;
 }
 
-void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_only)
+void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_only, const QStringList& comments)
 {
 	//get selected rows
 	QSet<int> selected_rows = selectedTableRows(table).toSet();
 
+	//comments
+	QString output;
+	if (comments.size() > 0)
+	{
+		output += "##";
+		output += comments.join("\n##");
+		output += "\n";
+	}
+
 	//header
-	QString output = "#";
+	output += "#";
 	for (int col=0; col<table->columnCount(); ++col)
 	{
 		if (col!=0) output += '\t';
