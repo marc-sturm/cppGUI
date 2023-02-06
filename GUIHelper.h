@@ -36,7 +36,7 @@ public:
 	///Creates a table cell item
 	static QTableWidgetItem* createTableItem(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
 	static QTableWidgetItem* createTableItem(int value, Qt::Alignment alignment=Qt::AlignRight|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
-	static QTableWidgetItem* createTableItem(double value, Qt::Alignment alignment=Qt::AlignRight|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled), int prec = 6);
+	static QTableWidgetItem* createTableItem(double value, int prec = 6, Qt::Alignment alignment=Qt::AlignRight|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
 	static QTableWidgetItem* createTableItem(const QByteArray& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
 	static QTableWidgetItem* createTableItem(const char* text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
 
@@ -52,9 +52,6 @@ public:
 
 	///Copy all content of a table widget to the clipboard
 	static void copyToClipboard(const QTableWidget* table, bool selected_rows_only=false, const QStringList& comments = QStringList());
-
-	///Returns the index of the given column. If the column is not found, a ArgumentException is thrown or -1 is returned (if throw_if_not_found is set to false).
-	static int columnIndex(const QTableWidget* table, QString column, bool throw_if_not_found=true);
 
 	///Returns the index of the given column. If the column is not found, a ArgumentException is thrown or -1 is returned (if throw_if_not_found is set to false).
 	static int columnIndex(const QTableWidget* table, QString column, bool throw_if_not_found=true);
