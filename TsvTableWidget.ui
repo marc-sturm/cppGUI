@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
-    <height>806</height>
+    <width>532</width>
+    <height>206</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,8 +46,8 @@
     <widget class="QTableWidget" name="table">
      <property name="minimumSize">
       <size>
-       <width>800</width>
-       <height>800</height>
+       <width>500</width>
+       <height>200</height>
       </size>
      </property>
     </widget>
@@ -74,7 +74,7 @@
      <property name="text">
       <string>...</string>
      </property>
-	  <property name="icon">
+     <property name="icon">
       <iconset resource="resources.qrc">
        <normaloff>:/Icons/Clipboard.png</normaloff>:/Icons/Clipboard.png</iconset>
      </property>
