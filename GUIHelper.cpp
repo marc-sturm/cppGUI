@@ -51,6 +51,7 @@ QSharedPointer<QDialog> GUIHelper::createDialog(QWidget* widget, QString title, 
 	{
 		QLabel* label_widget = new QLabel(label);
 		label_widget->setTextFormat(Qt::RichText);
+		label_widget->setTextInteractionFlags(Qt::TextSelectableByMouse|Qt::LinksAccessibleByMouse);
 		dialog->layout()->addWidget(label_widget);
 	}
 	dialog->layout()->addWidget(widget);
