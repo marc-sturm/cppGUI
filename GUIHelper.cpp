@@ -371,7 +371,7 @@ QString GUIHelper::colorToQssFormat(const QColor& color)
 			.arg(color.alpha());
 }
 
-void GUIHelper::showException(QWidget* parent, Exception& e, QString title)
+void GUIHelper::showException(QWidget* parent, const Exception& e, QString title)
 {
 	//reset override cursor
 	while(QApplication::overrideCursor()!=nullptr)

@@ -71,7 +71,7 @@ public:
 	///Shows an error message to the user.
 	///If the excpetion is expected (see Excpetion::isExpected), a information dialog is shown. Otherwise, a critical dialog is shown.
 	///If a override cursor is set, it is removed before showing the dialog.
-	static void showException(QWidget* parent, Exception& e, QString title);
+	static void showException(QWidget* parent, const Exception& e, QString title);
 
 protected:
 	///Constructor declared away.
