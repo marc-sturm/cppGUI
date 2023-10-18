@@ -32,6 +32,8 @@ public:
 
 	///Resize column width and hight
 	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1, bool first_height_for_all=true, int rows_used_for_column_width=1000);
+	///Resizes the table to height to show all rows
+	static void resizeTableHeight(QTableWidget* widget);
 
 	///Creates a table cell item
 	static QTableWidgetItem* createTableItem(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));

@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QHeaderView>
 #include <QMessageBox>
+#include <QScrollBar>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -126,6 +127,34 @@ void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool f
 	{
 		widget->resizeRowsToContents();
 	}
+}
+
+void GUIHelper::resizeTableHeight(QTableWidget* widget)
+{
+		int height = 0;
+
+		//rows
+		for (int i = 0; i < widget->verticalHeader()->count(); ++i)
+		{
+			if (!widget->verticalHeader()->isSectionHidden(i))
+			{
+				height += widget->verticalHeader()->sectionSize(i);
+			}
+		}
+
+		//scroll bar
+		if (!widget->horizontalScrollBar()->isHidden())
+		{
+			 height += widget->horizontalScrollBar()->height();
+		}
+
+		//header
+		if (!widget->horizontalHeader()->isHidden())
+		{
+			 height += widget->horizontalHeader()->height();
+		}
+
+		widget->setMinimumHeight(height);
 }
 
 QTableWidgetItem* GUIHelper::createTableItem(const QString& text, Qt::Alignment alignment, Qt::ItemFlags flags)
