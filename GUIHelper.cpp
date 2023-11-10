@@ -17,10 +17,23 @@
 
 QT_CHARTS_USE_NAMESPACE
 
+QMainWindow* GUIHelper::mainWindow()
+{
+	QMainWindow* mw = nullptr;
+	foreach(QWidget* widget, QApplication::topLevelWidgets())
+	{
+		if (!widget->isWindow()) continue;
+
+		QMainWindow* tmp = qobject_cast<QMainWindow*>(widget);
+		if (tmp!=nullptr) mw = tmp;
+	}
+	return mw;
+}
+
 void GUIHelper::showMessage(QString title, QString message, QMap<QString, QString> add_info)
 {
 	//create dialog
-	QDialog* dialog = new QDialog(QApplication::activeWindow());
+	QDialog* dialog = new QDialog(mainWindow());
 	dialog->window()->setWindowTitle(title);
 	QGridLayout* layout = new QGridLayout();
 	dialog->window()->setLayout(layout);
@@ -42,7 +55,7 @@ void GUIHelper::showMessage(QString title, QString message, QMap<QString, QStrin
 
 QSharedPointer<QDialog> GUIHelper::createDialog(QWidget* widget, QString title, QString label, bool add_buttons)
 {
-	QSharedPointer<QDialog> dialog = QSharedPointer<QDialog>(new QDialog(QApplication::activeWindow()));
+	QSharedPointer<QDialog> dialog = QSharedPointer<QDialog>(new QDialog(mainWindow()));
 	dialog->setWindowFlags(Qt::Window);
 	dialog->setWindowTitle(title);
 

@@ -11,6 +11,7 @@
 #include <QSplitter>
 #include <QTableWidget>
 #include <QCompleter>
+#include <QMainWindow>
 
 namespace QtCharts
 {
@@ -21,6 +22,9 @@ namespace QtCharts
 class CPPGUISHARED_EXPORT GUIHelper
 {
 public:
+	///Returns the main window of the application;
+	static QMainWindow* mainWindow();
+
 	///Shows a message dialog with title, message and additional information.
 	static void showMessage(QString title, QString message, QMap<QString, QString> add_info=QMap<QString, QString>());
 
