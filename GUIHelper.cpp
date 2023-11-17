@@ -144,30 +144,30 @@ void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool f
 
 void GUIHelper::resizeTableHeight(QTableWidget* widget)
 {
-		int height = 0;
+	int height = 0;
 
-		//rows
-		for (int i = 0; i < widget->verticalHeader()->count(); ++i)
+	//rows
+	for (int i = 0; i < widget->verticalHeader()->count(); ++i)
+	{
+		if (!widget->verticalHeader()->isSectionHidden(i))
 		{
-			if (!widget->verticalHeader()->isSectionHidden(i))
-			{
-				height += widget->verticalHeader()->sectionSize(i);
-			}
+			height += widget->verticalHeader()->sectionSize(i);
 		}
+	}
 
-		//scroll bar
-		if (!widget->horizontalScrollBar()->isHidden())
-		{
-			 height += widget->horizontalScrollBar()->height();
-		}
+	//scroll bar
+	if (!widget->horizontalScrollBar()->isHidden())
+	{
+		height += widget->horizontalScrollBar()->height();
+	}
 
-		//header
-		if (!widget->horizontalHeader()->isHidden())
-		{
-			 height += widget->horizontalHeader()->height();
-		}
+	//header
+	if (!widget->horizontalHeader()->isHidden())
+	{
+		height += widget->horizontalHeader()->height();
+	}
 
-		widget->setMinimumHeight(height);
+	widget->setMinimumHeight(height);
 }
 
 QTableWidgetItem* GUIHelper::createTableItem(const QString& text, Qt::Alignment alignment, Qt::ItemFlags flags)
@@ -206,14 +206,14 @@ QTableWidgetItem* GUIHelper::createTableItem(const char* text, Qt::Alignment ali
 	return createTableItem(QString(text), alignment, flags);
 }
 
-QLabel* GUIHelper::createLinkLabel(const QString& text, Qt::Alignment alignment)
+QLabel* GUIHelper::createLinkLabel(const QString& text, bool external_link)
 {
 	QLabel* label = new QLabel();
 
 	label->setMargin(2);
 	label->setText(text);
-	label->setAlignment(alignment);
-	label->setOpenExternalLinks(true);
+	label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+	if (external_link) label->setOpenExternalLinks(true);
 
 	return label;
 }

@@ -48,7 +48,7 @@ public:
 
 
 	///Creates a label that can open links in the text.
-	static QLabel* createLinkLabel(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop);
+	static QLabel* createLinkLabel(const QString& text, bool external_link=true);
 
 	///Returns the selected rows of a table (sorted ascending)
 	static QList<int> selectedTableRows(const QTableWidget* table, bool skip_hidden=true);
