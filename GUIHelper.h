@@ -42,6 +42,7 @@ public:
 	///Creates a table cell item
 	static QTableWidgetItem* createTableItem(const QString& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
 	static QTableWidgetItem* createTableItem(int value, Qt::Alignment alignment=Qt::AlignRight|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
+	///use prec = -1 to prevend rounding
 	static QTableWidgetItem* createTableItem(double value, int prec = 6, Qt::Alignment alignment=Qt::AlignRight|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
 	static QTableWidgetItem* createTableItem(const QByteArray& text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));
 	static QTableWidgetItem* createTableItem(const char* text, Qt::Alignment alignment=Qt::AlignLeft|Qt::AlignTop, Qt::ItemFlags flags =(Qt::ItemIsSelectable|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled));

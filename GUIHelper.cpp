@@ -190,7 +190,14 @@ QTableWidgetItem* GUIHelper::createTableItem(int value, Qt::Alignment alignment,
 QTableWidgetItem* GUIHelper::createTableItem(double value, int prec, Qt::Alignment alignment, Qt::ItemFlags flags)
 {
 	QTableWidgetItem* item = new QTableWidgetItem;
-	item->setData(Qt::EditRole, QString::number(value, 'f', prec).toDouble());
+	if (prec == -1)
+	{
+		item->setData(Qt::EditRole, value);
+	}
+	else
+	{
+		item->setData(Qt::EditRole, QString::number(value, 'f', prec).toDouble());
+	}
 	item->setTextAlignment(alignment);
 	item->setFlags(flags);
 	return item;
