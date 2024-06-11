@@ -95,11 +95,77 @@ void GUIHelper::styleSplitter(QSplitter* splitter)
 	}
 }
 
+void GUIHelper::resizeTableCellWidths(QTableWidget* widget, int max_col_width, int max_used)
+{
+	widget->horizontalHeader()->setResizeContentsPrecision(max_used);
+	widget->resizeColumnsToContents();
+
+	//restrict width
+	if (max_col_width>0)
+	{
+		for (int i=0; i<widget->columnCount(); ++i)
+		{
+			if (widget->columnWidth(i)>max_col_width)
+			{
+				widget->setColumnWidth(i, max_col_width);
+			}
+		}
+	}
+}
+
+void GUIHelper::resizeTableCellHeightsToMinimum(QTableWidget* widget, int max_used)
+{
+	//determine min height
+	int used = 0;
+	int height = 9999;
+	for (int i=0; i<widget->rowCount(); ++i)
+	{
+		widget->resizeRowToContents(i);
+		qDebug() << height << widget->rowHeight(i);
+		height = std::min(widget->rowHeight(i), height);
+		qDebug() << height;
+
+		++used;
+		if (used>=max_used) break;
+	}
+
+	//set row height
+	if (height!=-1)
+	{
+		for (int i=0; i<widget->rowCount(); ++i)
+		{
+			widget->setRowHeight(i, height);
+		}
+	}
+}
+
+void GUIHelper::resizeTableCellHeightsToFirst(QTableWidget* widget, bool first_visible)
+{
+	//determine max height
+	int height = -1;
+	for (int i=0; i<widget->rowCount(); ++i)
+	{
+		if (first_visible && widget->isRowHidden(i)) continue;
+
+		widget->resizeRowToContents(i);
+		height = widget->rowHeight(i);
+		break;
+	}
+
+	//set row height
+	if (height!=-1)
+	{
+		for (int i=0; i<widget->rowCount(); ++i)
+		{
+			widget->setRowHeight(i, height);
+		}
+	}
+}
+
 void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool first_height_for_all, int rows_used_for_column_width)
 {
-	//resize columns width
-	widget->horizontalHeader()->setResizeContentsPrecision(rows_used_for_column_width);
-	widget->resizeColumnsToContents();
+	resizeTableCellWidths(widget, max_col_width, rows_used_for_column_width);
+	widget->resizeRowsToContents();
 
 	//restrict width
 	if (max_col_width>0)
@@ -116,25 +182,7 @@ void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool f
 	//determine row height
 	if (first_height_for_all)
 	{
-		int height = -1;
-		for (int i=0; i<widget->rowCount(); ++i)
-		{
-			if (!widget->isRowHidden(i))
-			{
-				widget->resizeRowToContents(i);
-				height = widget->rowHeight(i);
-				break;
-			}
-		}
-
-		//set row height
-		if (height!=-1)
-		{
-			for (int i=0; i<widget->rowCount(); ++i)
-			{
-				widget->setRowHeight(i, height);
-			}
-		}
+		resizeTableCellHeightsToFirst(widget, true);
 	}
 	else
 	{
