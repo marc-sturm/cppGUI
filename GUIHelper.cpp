@@ -162,34 +162,6 @@ void GUIHelper::resizeTableCellHeightsToFirst(QTableWidget* widget, bool first_v
 	}
 }
 
-void GUIHelper::resizeTableCells(QTableWidget* widget, int max_col_width, bool first_height_for_all, int rows_used_for_column_width)
-{
-	resizeTableCellWidths(widget, max_col_width, rows_used_for_column_width);
-	widget->resizeRowsToContents();
-
-	//restrict width
-	if (max_col_width>0)
-	{
-		for (int i=0; i<widget->columnCount(); ++i)
-		{
-			if (widget->columnWidth(i)>max_col_width)
-			{
-				widget->setColumnWidth(i, max_col_width);
-			}
-		}
-	}
-
-	//determine row height
-	if (first_height_for_all)
-	{
-		resizeTableCellHeightsToFirst(widget, true);
-	}
-	else
-	{
-		widget->resizeRowsToContents();
-	}
-}
-
 void GUIHelper::resizeTableHeight(QTableWidget* widget)
 {
 	int height = 0;

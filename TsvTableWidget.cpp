@@ -45,7 +45,8 @@ void TsvTableWidget::updateTable()
 		}
 	}
 
-	GUIHelper::resizeTableCells(ui_->table);
+	GUIHelper::resizeTableCellWidths(ui_->table),
+	GUIHelper::resizeTableCellHeightsToFirst(ui_->table);
 }
 
 void TsvTableWidget::showComments()

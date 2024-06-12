@@ -38,7 +38,6 @@ public:
 	static void resizeTableCellWidths(QTableWidget* widget, int max_col_width=-1, int max_used=200);
 	static void resizeTableCellHeightsToMinimum(QTableWidget* widget, int max_used=200);
 	static void resizeTableCellHeightsToFirst(QTableWidget* widget, bool first_visible=true);
-	static void resizeTableCells(QTableWidget* widget, int max_col_width=-1, bool first_height_for_all=true, int rows_used_for_column_width=1000);
 	///Resizes the table to height to show all rows
 	static void resizeTableHeight(QTableWidget* widget);
 
