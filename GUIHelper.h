@@ -78,7 +78,7 @@ public:
 	static QString colorToQssFormat(const QColor &color);
 
 	///Shows an error message to the user.
-	///If the excpetion is expected (see Excpetion::isExpected), a information dialog is shown. Otherwise, a critical dialog is shown.
+	///Depending on the ExceptionType, a critical, warning or notice dialog is shown.
 	///If a override cursor is set, it is removed before showing the dialog.
 	static void showException(QWidget* parent, const Exception& e, QString title);
 
