@@ -121,7 +121,8 @@ void GUIHelper::resizeTableCellHeightsToMinimum(QTableWidget* widget, int max_us
 	for (int i=0; i<widget->rowCount(); ++i)
 	{
 		widget->resizeRowToContents(i);
-		height = std::min(widget->rowHeight(i), height);
+		int row_height = widget->rowHeight(i);
+		if (row_height>0) height = std::min(row_height, height);
 
 		++used;
 		if (used>=max_used) break;
