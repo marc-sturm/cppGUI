@@ -138,13 +138,13 @@ void GUIHelper::resizeTableCellHeightsToMinimum(QTableWidget* widget, int max_us
 	}
 }
 
-void GUIHelper::resizeTableCellHeightsToFirst(QTableWidget* widget, bool first_visible)
+void GUIHelper::resizeTableCellHeightsToFirst(QTableWidget* widget, bool only_visible)
 {
 	//determine max height
 	int height = -1;
 	for (int i=0; i<widget->rowCount(); ++i)
 	{
-		if (first_visible && widget->isRowHidden(i)) continue;
+		if (only_visible && widget->isRowHidden(i)) continue;
 
 		widget->resizeRowToContents(i);
 		height = widget->rowHeight(i);
