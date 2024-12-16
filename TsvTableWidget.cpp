@@ -36,12 +36,12 @@ void TsvTableWidget::updateTable()
 	}
 
 	//rows
-	ui_->table->setRowCount(table_.rowCount());
-	for (int row=0; row<table_.rowCount(); ++row)
+	ui_->table->setRowCount(table_.count());
+	for (int row=0; row<table_.count(); ++row)
 	{
 		for (int col=0; col<table_.headers().count(); ++col)
 		{
-			ui_->table->setItem(row, col, new QTableWidgetItem(table_.row(row)[col]));
+			ui_->table->setItem(row, col, new QTableWidgetItem(table_[row][col]));
 		}
 	}
 
