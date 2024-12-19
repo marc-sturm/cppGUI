@@ -37,7 +37,8 @@ SOURCES += \
     QrCodeGenerator/QrSegment.cpp \
     QrCodeFactory.cpp \
     DelayedInitializationTimer.cpp \
-    TsvTableWidget.cpp
+    TsvTableWidget.cpp \
+    ImageLabel.cpp
 
 HEADERS += \
     Application.h \
@@ -53,7 +54,8 @@ HEADERS += \
     QrCodeGenerator/QrSegment.h \
     QrCodeFactory.h \
     DelayedInitializationTimer.h \
-    TsvTableWidget.h
+    TsvTableWidget.h \
+    ImageLabel.h
     
 RESOURCES += \
     resources.qrc
