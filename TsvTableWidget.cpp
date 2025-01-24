@@ -29,8 +29,8 @@ void TsvTableWidget::updateTable()
 	ui_->comments_btn->setEnabled(!table_.comments().isEmpty());
 
 	//headers
-	ui_->table->setColumnCount(table_.headers().count());
-	for (int col=0; col<table_.headers().count(); ++col)
+	ui_->table->setColumnCount(table_.columnCount());
+	for (int col=0; col<table_.columnCount(); ++col)
 	{
 		ui_->table->setHorizontalHeaderItem(col, new QTableWidgetItem(table_.headers()[col]));
 	}
@@ -39,7 +39,7 @@ void TsvTableWidget::updateTable()
 	ui_->table->setRowCount(table_.count());
 	for (int row=0; row<table_.count(); ++row)
 	{
-		for (int col=0; col<table_.headers().count(); ++col)
+		for (int col=0; col<table_.columnCount(); ++col)
 		{
 			ui_->table->setItem(row, col, new QTableWidgetItem(table_[row][col]));
 		}
