@@ -289,7 +289,7 @@ QList<int> GUIHelper::selectedTableColumns(const QTableWidget* table, bool skip_
 void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_only, const QStringList& comments)
 {
 	//get selected rows
-	QSet<int> selected_rows = selectedTableRows(table).toSet();
+    QSet<int> selected_rows = LIST_TO_SET(selectedTableRows(table));
 
 	//comments
 	QString output;
