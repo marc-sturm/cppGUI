@@ -14,6 +14,8 @@
 #include <QHeaderView>
 #include <QMessageBox>
 #include <QScrollBar>
+#include <QSortFilterProxyModel>
+#include <QStringListModel>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -425,12 +427,16 @@ QChartView* GUIHelper::histogramChart(const Histogram& hist, QString title, int 
 
 QCompleter*GUIHelper::completer(QObject* parent, const QStringList& items)
 {
-	QCompleter* completer = new QCompleter(items, parent);
+    QStringListModel *model = new QStringListModel(items, parent);
 
-	completer->setCompletionMode(QCompleter::PopupCompletion);
-	completer->setCaseSensitivity(Qt::CaseInsensitive);
-	completer->setFilterMode(Qt::MatchContains);
-	completer->setCompletionRole(Qt::DisplayRole);
+    QSortFilterProxyModel *proxy_model = new QSortFilterProxyModel(parent);
+    proxy_model->setSourceModel(model);
+    proxy_model->setFilterCaseSensitivity(Qt::CaseInsensitive);
+
+    QCompleter *completer = new QCompleter(proxy_model, parent);
+    completer->setCompletionMode(QCompleter::PopupCompletion);
+    completer->setFilterMode(Qt::MatchContains);
+    completer->setCompletionRole(Qt::DisplayRole);
 
 	return completer;
 }
