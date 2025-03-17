@@ -13,7 +13,7 @@
 #include <QCompleter>
 #include <QMainWindow>
 
-#if QT_VERSION > QT_VERSION_CHECK(5, 15, 15)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtCharts/QChartView>
 #else
 namespace QtCharts
@@ -73,7 +73,7 @@ public:
 	static QFrame* horizontalLine();
 
     ///Creates a chart with a histogram
-    #if QT_VERSION > QT_VERSION_CHECK(5, 15, 15)
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     static QChartView* histogramChart(const Histogram& hist, QString title, int highlight_bin=-1);
     #else
     static QtCharts::QChartView* histogramChart(const Histogram& hist, QString title, int highlight_bin=-1);
