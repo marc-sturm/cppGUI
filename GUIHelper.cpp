@@ -9,7 +9,6 @@
 #include <QBarSeries>
 #include <QBarCategoryAxis>
 #include <QValueAxis>
-#include <QChartView>
 #include <QDebug>
 #include <QHeaderView>
 #include <QMessageBox>
@@ -17,7 +16,14 @@
 #include <QSortFilterProxyModel>
 #include <QStringListModel>
 
+#if QT_VERSION > QT_VERSION_CHECK(5, 15, 15)
+#include <QtCharts/QChartView>
+#else
+#include <QChartView>
 QT_CHARTS_USE_NAMESPACE
+#endif
+
+
 
 QMainWindow* GUIHelper::mainWindow()
 {
@@ -62,7 +68,7 @@ QSharedPointer<QDialog> GUIHelper::createDialog(QWidget* widget, QString title, 
 	dialog->setWindowTitle(title);
 
 	dialog->setLayout(new QBoxLayout(QBoxLayout::TopToBottom));
-	dialog->layout()->setMargin(3);
+    dialog->layout()->setContentsMargins(3, 3, 3, 3);
 	if (!label.isEmpty())
 	{
 		QLabel* label_widget = new QLabel(label);
@@ -243,7 +249,7 @@ QLabel* GUIHelper::createLinkLabel(const QString& text, bool external_link)
 {
 	QLabel* label = new QLabel();
 
-	label->setMargin(2);
+    label->setContentsMargins(2, 2, 2, 2);
 	label->setText(text);
 	label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
 	if (external_link) label->setOpenExternalLinks(true);

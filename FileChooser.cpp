@@ -18,7 +18,7 @@ FileChooser::FileChooser(FileChooser::Type type, QWidget *parent)
 
 	//create layout
 	QBoxLayout* layout = new QBoxLayout(QBoxLayout::LeftToRight);
-	layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
 	layout->setSpacing(3);
 	setLayout(layout);
 
