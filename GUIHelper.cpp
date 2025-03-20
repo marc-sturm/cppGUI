@@ -425,7 +425,7 @@ QChartView* GUIHelper::histogramChart(const Histogram& hist, QString title, int 
 	return view;
 }
 
-QCompleter*GUIHelper::completer(QObject* parent, const QStringList& items)
+QCompleter* GUIHelper::completer(QObject* parent, const QStringList& items)
 {
     QStringListModel *model = new QStringListModel(items, parent);
 
@@ -437,6 +437,7 @@ QCompleter*GUIHelper::completer(QObject* parent, const QStringList& items)
     completer->setCompletionMode(QCompleter::PopupCompletion);
     completer->setFilterMode(Qt::MatchContains);
     completer->setCompletionRole(Qt::DisplayRole);
+	completer->setCaseSensitivity(Qt::CaseInsensitive);
 
 	return completer;
 }
