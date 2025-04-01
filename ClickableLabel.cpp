@@ -14,5 +14,9 @@ void ClickableLabel::mouseReleaseEvent(QMouseEvent* e)
 	}
 
 	e->accept();
-	emit clicked(e->globalPos());
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    emit clicked(e->globalPosition().toPoint());
+    #else
+    emit clicked(e->globalPos());
+    #endif
 }
