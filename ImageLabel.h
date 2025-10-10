@@ -3,7 +3,6 @@
 
 #include "cppGUI_global.h"
 #include <QLabel>
-#include <QMouseEvent>
 
 ///Label managing the QImage it is displaying and
 /// Updating the image on resizeEvents according to the aspect ratio of the image.

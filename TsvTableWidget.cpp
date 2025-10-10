@@ -2,9 +2,8 @@
 #include "ui_TsvTableWidget.h"
 
 #include <QToolTip>
-#include <QDebug>
-#include <QClipboard>
 #include "GUIHelper.h"
+#include <QClipboard>
 
 TsvTableWidget::TsvTableWidget(const TsvFile& table, QWidget* parent)
 	: QWidget(parent)

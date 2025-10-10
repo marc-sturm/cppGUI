@@ -1,6 +1,4 @@
 #include "DelayedInitializationTimer.h"
-#include <QDateTime>
-#include <QDebug>
 
 DelayedInitializationTimer::DelayedInitializationTimer(QWidget* client, bool auto_connect)
 	: QObject()

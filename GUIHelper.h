@@ -4,7 +4,6 @@
 #include "cppGUI_global.h"
 #include "Histogram.h"
 #include "Exceptions.h"
-#include "ClickableLabel.h"
 #include <QString>
 #include <QMap>
 #include <QWidget>
@@ -12,6 +11,7 @@
 #include <QTableWidget>
 #include <QCompleter>
 #include <QMainWindow>
+#include <QLabel>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtCharts/QChartView>

@@ -1,20 +1,21 @@
 #include "GUIHelper.h"
 #include <QDialog>
 #include <QApplication>
-#include <QFormLayout>
 #include <QLabel>
 #include <QDialogButtonBox>
-#include <QClipboard>
 #include <QBarSet>
 #include <QBarSeries>
 #include <QBarCategoryAxis>
 #include <QValueAxis>
 #include <QDebug>
-#include <QHeaderView>
 #include <QMessageBox>
-#include <QScrollBar>
 #include <QSortFilterProxyModel>
 #include <QStringListModel>
+#include <QLayout>
+#include <QHeaderView>
+#include <QScrollBar>
+#include <QClipboard>
+#include <QMimeData>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtCharts/QChartView>

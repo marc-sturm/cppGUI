@@ -4,11 +4,10 @@
 #include <QFileDialog>
 #include <QDragEnterEvent>
 #include <QDropEvent>
-#include <QUrl>
 #include <QMenu>
 #include <QDesktopServices>
-#include <QMimeData>
 #include <QBoxLayout>
+#include <QMimeData>
 
 FileChooser::FileChooser(FileChooser::Type type, QWidget *parent)
 	: QWidget(parent)
