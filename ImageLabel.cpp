@@ -25,10 +25,11 @@ void ImageLabel::updateImage()
 
 	if (aspect_ratio * height() <= width())
 	{
-		setPixmap(QPixmap::fromImage(image_).scaledToHeight(height()));
-	} else
+		setPixmap(QPixmap::fromImage(image_).scaledToHeight(height(), Qt::SmoothTransformation));
+	}
+	else
 	{
-		setPixmap(QPixmap::fromImage(image_).scaledToWidth(width()));
+		setPixmap(QPixmap::fromImage(image_).scaledToWidth(width(), Qt::SmoothTransformation));
 	}
 }
 
