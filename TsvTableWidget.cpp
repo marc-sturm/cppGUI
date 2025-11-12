@@ -1,9 +1,9 @@
 #include "TsvTableWidget.h"
 #include "ui_TsvTableWidget.h"
-
 #include <QToolTip>
 #include "GUIHelper.h"
 #include <QClipboard>
+#include <QMenu>
 
 TsvTableWidget::TsvTableWidget(const TsvFile& table, QWidget* parent)
 	: QWidget(parent)
@@ -12,14 +12,19 @@ TsvTableWidget::TsvTableWidget(const TsvFile& table, QWidget* parent)
 {
 	ui_->setupUi(this);
 	connect(ui_->comments_btn, SIGNAL(clicked(bool)), this, SLOT(showComments()));
-	connect(ui_->copy_btn, SIGNAL(clicked(bool)), this, SLOT(copyToClipboard()));
+	connect(ui_->copy_btn, SIGNAL(clicked(bool)), this, SLOT(copyAllToClipboard()));
+	connect(ui_->table, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(customContextMenuRequested(QPoint)));
+	connect(ui_->table, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(cellDoubleClicked(int, int)));
 
 	updateTable();
 }
 
-TsvTableWidget::~TsvTableWidget()
+QString TsvTableWidget::getText(int row, int col)
 {
-	delete ui_;
+	QTableWidgetItem* item = ui_->table->item(row, col);
+	if (item==nullptr) return "";
+
+	return item->text();
 }
 
 void TsvTableWidget::updateTable()
@@ -31,7 +36,8 @@ void TsvTableWidget::updateTable()
 	ui_->table->setColumnCount(table_.columnCount());
 	for (int col=0; col<table_.columnCount(); ++col)
 	{
-		ui_->table->setHorizontalHeaderItem(col, new QTableWidgetItem(table_.headers()[col]));
+
+		ui_->table->setHorizontalHeaderItem(col, GUIHelper::createTableItem(table_.headers()[col]));
 	}
 
 	//rows
@@ -40,7 +46,7 @@ void TsvTableWidget::updateTable()
 	{
 		for (int col=0; col<table_.columnCount(); ++col)
 		{
-			ui_->table->setItem(row, col, new QTableWidgetItem(table_[row][col]));
+			ui_->table->setItem(row, col, GUIHelper::createTableItem(table_[row][col]));
 		}
 	}
 
@@ -54,7 +60,38 @@ void TsvTableWidget::showComments()
 	QToolTip::showText(pos, table_.comments().join("\n"));
 }
 
-void TsvTableWidget::copyToClipboard()
+void TsvTableWidget::copyAllToClipboard()
 {
 	QApplication::clipboard()->setText(table_.toString());
+}
+
+void TsvTableWidget::customContextMenuRequested(QPoint pos)
+{
+	//set up menu
+	QMenu menu;
+	QAction* a_copy_sel = menu.addAction(QIcon(":/Icons/Clipboard.png"), "Copy selected row(s) to clipboard");
+	QAction* a_copy_cell = menu.addAction(QIcon(":/Icons/Clipboard.png"), "Copy cell under cursor to clipboard");
+
+	//show menu
+	QAction* action = menu.exec(ui_->table->viewport()->mapToGlobal(pos));
+	if (action==nullptr) return;
+
+	//execute
+	if (action==a_copy_sel)
+	{
+		GUIHelper::copyToClipboard(ui_->table, true);
+	}
+	if (action==a_copy_cell)
+	{
+		QTableWidgetItem* item = ui_->table->itemAt(pos);
+		if (item!=nullptr)
+		{
+			QApplication::clipboard()->setText(item->text());
+		}
+	}
+}
+
+void TsvTableWidget::cellDoubleClicked(int row, int /*col*/)
+{
+	emit rowDoubleClicked(row);
 }

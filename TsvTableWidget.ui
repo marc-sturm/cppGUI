@@ -36,7 +36,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>20</width>
+       <width>15</width>
        <height>744</height>
       </size>
      </property>
@@ -49,6 +49,12 @@
        <width>500</width>
        <height>200</height>
       </size>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
      </property>
     </widget>
    </item>
