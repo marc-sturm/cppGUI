@@ -128,7 +128,7 @@ void GUIHelper::resizeTableCellHeightsToMinimum(QTableWidget* widget, int max_us
 	int used = 0;
 	int height = -1;
 	for (int i=0; i<widget->rowCount(); ++i)
-	{
+    {
 		widget->resizeRowToContents(i);
 		int row_height = widget->rowHeight(i);
 		if (row_height>0)
@@ -142,13 +142,10 @@ void GUIHelper::resizeTableCellHeightsToMinimum(QTableWidget* widget, int max_us
 		if (used>=max_used) break;
 	}
 
-	//set row height
-	if (height!=-1)
+    //set row height
+    if (height!=-1)
 	{
-		for (int i=0; i<widget->rowCount(); ++i)
-		{
-			widget->setRowHeight(i, height);
-		}
+        widget->verticalHeader()->setDefaultSectionSize(height);
 	}
 }
 
@@ -167,11 +164,8 @@ void GUIHelper::resizeTableCellHeightsToFirst(QTableWidget* widget, bool only_vi
 
 	//set row height
 	if (height!=-1)
-	{
-		for (int i=0; i<widget->rowCount(); ++i)
-		{
-			widget->setRowHeight(i, height);
-		}
+    {
+        widget->verticalHeader()->setDefaultSectionSize(height);
 	}
 }
 
