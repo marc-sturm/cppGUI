@@ -16,15 +16,7 @@
 #include <QScrollBar>
 #include <QClipboard>
 #include <QMimeData>
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtCharts/QChartView>
-#else
-#include <QChartView>
-QT_CHARTS_USE_NAMESPACE
-#endif
-
-
 
 QMainWindow* GUIHelper::mainWindow()
 {
@@ -298,7 +290,8 @@ QList<int> GUIHelper::selectedTableColumns(const QTableWidget* table, bool skip_
 void GUIHelper::copyToClipboard(const QTableWidget* table, bool selected_rows_only, const QStringList& comments)
 {
 	//get selected rows
-    QSet<int> selected_rows = LIST_TO_SET(selectedTableRows(table));
+	QList<int> all_selected_rows = selectedTableRows(table);
+	QSet<int> selected_rows = QSet<int>(all_selected_rows.begin(), all_selected_rows.end());
 
 	//comments
 	QString output;

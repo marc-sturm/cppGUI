@@ -12,15 +12,7 @@
 #include <QCompleter>
 #include <QMainWindow>
 #include <QLabel>
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtCharts/QChartView>
-#else
-namespace QtCharts
-{
-    class QChartView; //forward declaration so that not all tools need to import the Qt charts namespace
-}
-#endif
 
 ///Auxilary helper functions for the GUI.
 class CPPGUISHARED_EXPORT GUIHelper
@@ -72,12 +64,8 @@ public:
 	///Creates a horizontal line
 	static QFrame* horizontalLine();
 
-    ///Creates a chart with a histogram
-    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    static QChartView* histogramChart(const Histogram& hist, QString title, int highlight_bin=-1);
-    #else
-    static QtCharts::QChartView* histogramChart(const Histogram& hist, QString title, int highlight_bin=-1);
-    #endif
+    ///Creates a chart with a histogram    
+    static QChartView* histogramChart(const Histogram& hist, QString title, int highlight_bin=-1);   
 
 	///Creates a list-based auto-completer
 	static QCompleter* completer(QObject* parent, const QStringList& items);
