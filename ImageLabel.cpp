@@ -11,6 +11,12 @@ void ImageLabel::setImage(QImage image)
 	updateImage();
 }
 
+void ImageLabel::clearImage()
+{
+    image_ = QImage();
+    updateImage();
+}
+
 
 void ImageLabel::resizeEvent(QResizeEvent* event)
 {

@@ -16,6 +16,8 @@ public:
 
 	void setImage(QImage image);
 
+    void clearImage();
+
 	void resizeEvent(QResizeEvent* event);
 
 public slots:
