@@ -13,17 +13,12 @@ SOURCES += \
     AboutDialog.cpp \
     Application.cpp \
     GUIHelper.cpp \
-    FileChooser.cpp \
     ClickableLabel.cpp \
     ClickableLineEdit.cpp \
     ColorSelector.cpp \
     MarkdownEditor.cpp \
     ScrollableTextDialog.cpp \
     BusyDialog.cpp \
-    QrCodeGenerator/BitBuffer.cpp \
-    QrCodeGenerator/QrCode.cpp \
-    QrCodeGenerator/QrSegment.cpp \
-    QrCodeFactory.cpp \
     DelayedInitializationTimer.cpp \
     TsvTableWidget.cpp \
     ImageLabel.cpp
@@ -32,17 +27,12 @@ HEADERS += \
     AboutDialog.h \
     Application.h \
     GUIHelper.h \
-    FileChooser.h \
     ClickableLabel.h \
     ClickableLineEdit.h \
     ColorSelector.h \
     MarkdownEditor.h \
     ScrollableTextDialog.h \
     BusyDialog.h \
-    QrCodeGenerator/BitBuffer.h \
-    QrCodeGenerator/QrCode.h \
-    QrCodeGenerator/QrSegment.h \
-    QrCodeFactory.h \
     DelayedInitializationTimer.h \
     TsvTableWidget.h \
     ImageLabel.h
